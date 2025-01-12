@@ -1,5 +1,5 @@
 class Pelanggan:
-    def _init_(self, nama, email, no_telepon):
+    def __init__(self, nama, email, no_telepon):
         self.nama = nama
         self.email = email
         self.no_telepon = no_telepon

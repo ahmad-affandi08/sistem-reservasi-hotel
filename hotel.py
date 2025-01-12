@@ -80,8 +80,23 @@ class Hotel:
         
         nomor_kamar = input("Masukkan nomor kamar: ")
         jumlah_malam = int(input("Masukkan jumlah malam: "))
-        hasil = self.buat_reservasi(pelanggan_baru, nomor_kamar, jumlah_malam)
-        print(hasil)
+        
+        # Membuat reservasi
+        hasil_reservasi = self.buat_reservasi(pelanggan_baru, nomor_kamar, jumlah_malam)
+        print(hasil_reservasi)
+        
+        # Jika reservasi berhasil dibuat, lanjutkan ke proses pembayaran
+        if "Reservasi berhasil" in hasil_reservasi:
+            self.menu_proses_pembayaran(self.reservasi_list[-1])  # Mengakses reservasi terbaru
+
+    def menu_proses_pembayaran(self, reservasi):
+        print(f"\nTotal harga yang harus dibayar: {reservasi.total_harga}")
+        metode_pembayaran = input("Pilih metode pembayaran (Tunai/Kartu Kredit): ")
+        jumlah = int(input(f"Masukkan jumlah yang harus dibayar: "))
+
+        # Proses pembayaran
+        hasil_pembayaran = self.proses_pembayaran(metode_pembayaran, jumlah, reservasi)
+        print(hasil_pembayaran)
 
     def menu_lihat_reservasi(self):
         print("\nDaftar Reservasi:")

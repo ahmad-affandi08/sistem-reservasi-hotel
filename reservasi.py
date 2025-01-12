@@ -2,7 +2,7 @@ from pelanggan import Pelanggan
 from kamar import Kamar
 
 class Reservasi:
-    def _init_(self, pelanggan, kamar, jumlah_malam):
+    def __init__(self, pelanggan, kamar, jumlah_malam):
         self.pelanggan = pelanggan
         self.kamar = kamar
         self.jumlah_malam = jumlah_malam
