@@ -32,8 +32,11 @@ class Hotel:
 
     def proses_pembayaran(self, metode_pembayaran, jumlah, reservasi):
         pembayaran = Pembayaran(metode_pembayaran, jumlah)
-        return pembayaran.proses_pembayaran(reservasi.total_harga)
+        hasil_pembayaran = pembayaran.proses_pembayaran(reservasi.total_harga)
 
+        if "Pembayaran berhasil" in hasil_pembayaran:
+            reservasi.status_pembayaran = "sudah"  # Update status pembayaran menjadi sudah dibayar
+            return hasil_pembayaran
     # Menu Admin
     def menu_admin(self):
         while True:
@@ -85,10 +88,15 @@ class Hotel:
         hasil_reservasi = self.buat_reservasi(pelanggan_baru, nomor_kamar, jumlah_malam)
         print(hasil_reservasi)
         
-        # Jika reservasi berhasil dibuat, lanjutkan ke proses pembayaran
+        # Jika reservasi berhasil dibuat, lanjutkan dengan pilihan pembayaran
         if "Reservasi berhasil" in hasil_reservasi:
+        # Tanyakan apakah pelanggan ingin bayar sekarang atau nanti
+            bayar_sekarang = input("Apakah Anda ingin membayar sekarang? (ya/tidak): ").lower()
+        
+        if bayar_sekarang == "ya":
             self.menu_proses_pembayaran(self.reservasi_list[-1])  # Mengakses reservasi terbaru
-
+        else:
+            print("Anda memilih untuk membayar nanti. Status pembayaran adalah 'belum'.")
     def menu_proses_pembayaran(self, reservasi):
         print(f"\nTotal harga yang harus dibayar: {reservasi.total_harga}")
         metode_pembayaran = input("Pilih metode pembayaran (Tunai/Kartu Kredit): ")

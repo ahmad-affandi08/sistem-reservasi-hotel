@@ -7,6 +7,7 @@ class Reservasi:
         self.kamar = kamar
         self.jumlah_malam = jumlah_malam
         self.total_harga = self.hitung_total_harga()
+        self.status_pembayaran = "belum"  # Status pembayaran awalnya belum dibayar
 
     def hitung_total_harga(self):
         return self.jumlah_malam * self.kamar.harga_per_malam
@@ -18,4 +19,4 @@ class Reservasi:
         return "Kamar sudah dipesan."
 
     def tampilkan_detail_reservasi(self):
-        return f"Reservasi oleh {self.pelanggan.nama}, Kamar: {self.kamar.nomor_kamar}, Jumlah Malam: {self.jumlah_malam}, Total Harga: {self.total_harga}"
+        return f"Reservasi oleh {self.pelanggan.nama}, Kamar: {self.kamar.nomor_kamar}, Jumlah Malam: {self.jumlah_malam}, Total Harga: {self.total_harga}, Status Pembayaran: {self.status_pembayaran}"
